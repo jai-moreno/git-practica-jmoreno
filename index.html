@@ -4,14 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="estilos.css">
-    <script type="text/javascript" src="app. js"></script>
+    <script type="text/javascript" src="app.js"></script>
     <title>Document</title>
+<script>
+var slideimages=new Array()
+var slidelinks=new Array()
+function slideshowimages(){
+for (i=0;i<slideshowimages.arguments.length;i++){
+slideimages[i]=new Image()
+slideimages[i].src=slideshowimages.arguments[i]
+}
+}
+
+function slideshowlinks(){
+for (i=0;i<slideshowlinks.arguments.length;i++)
+slidelinks[i]=slideshowlinks.arguments[i]
+}
+
+function gotoshow(){
+if (!window.winslide||winslide.closed)
+winslide=window.open(slidelinks[whichlink])
+else
+winslide.location=slidelinks[whichlink]
+winslide.focus()
+}
+</script>
 </head>
 <body>
     <header>
          <img id="header" src="img/headerccr.jpg" style="width:100%"> 
     </header>
-
+    <div class= "top-div">
     <nav class="ccr-topnav">
         <a href="#home" class="ccr-boton-nav">Home</a>
         <a href="#music" class="ccr-boton-nav">Music</a>
@@ -19,40 +42,31 @@
         <a href="#contact" class="ccr-boton-nav">Contact</a>
         <a href="#support" class="ccr-boton-nav">Support CCR</a>
       </nav>
-
-<!-- Slideshow container -->
-<div class="slideshow-container">
-
-  <!-- Full-width images with number and caption text -->
-  <div class="mySlides fade">
-    <div class="numbertext">1 / 3</div>
-    <img src="img/img1.jpg" style="width:100%">
-    <div class="text">H0RR0R SH0W</div>
-  </div>
-
-  <div class="mySlides fade">
-    <div class="numbertext">2 / 3</div>
-    <img src="img/img2.jpg" style="width:100%">
-    <div class="text">DIVISIVE KNOWLEDGE</div>
-  </div>
-
-  <div class="mySlides fade">
-    <div class="numbertext">3 / 3</div>
-    <img src="img/img3.jpg" style="width:100%">
-    <div class="text">BLU3SWOMVN</div>
-  </div>
-
-  <!-- Next and previous buttons -->
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-</div>
-<br>
-
-<!-- The dots/circles -->
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span>
-  <span class="dot" onclick="currentSlide(2)"></span>
-  <span class="dot" onclick="currentSlide(3)"></span>
-</div>
+    </div>
+    <a href="javascript:gotoshow()"><img src="img/img1.jpg" name="slide" border=0 width=100% height=auto></a>
+    <script>
+    //configure the paths of the images, plus corresponding target links
+    slideshowimages("img/img1.jpg","img/img2.jpg","img/img3.jpg","food4.jpg","food5.jpg")
+    slideshowlinks("http://food.epicurious.com/run/recipe/view?id=13285","http://food.epicurious.com/run/recipe/view?id=10092","http://food.epicurious.com/run/recipe/view?id=100975","http://food.epicurious.com/run/recipe/view?id=2876","http://food.epicurious.com/run/recipe/view?id=20010")
+    
+    //configure the speed of the slideshow, in miliseconds
+    var slideshowspeed=2000
+    
+    var whichlink=0
+    var whichimage=0
+    function slideit(){
+    if (!document.images)
+    return
+    document.images.slide.src=slideimages[whichimage].src
+    whichlink=whichimage
+    if (whichimage<slideimages.length-1)
+    whichimage++
+    else
+    whichimage=0
+    setTimeout("slideit()",slideshowspeed)
+    }
+    slideit()
+    
+    </script>
 </body>
 </html>
